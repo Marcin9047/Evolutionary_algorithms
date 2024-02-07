@@ -78,7 +78,6 @@ class Evolutionary_algorithm:
                 crossed_pop.append(parents[random.randint(0, 1)])
         return crossed_pop
 
-    # nofm - number of mutated elements in chromosome
     def mutation(self, p1, sigma):
         pop = copy.deepcopy(p1)
         new_population = []

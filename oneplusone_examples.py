@@ -1,17 +1,12 @@
-from WSI_2 import Evolutionary_algorithm, Solver_Results, Solver_Parameters
-from WSI_1 import (
-    gradient_descent,
-    Solver_Results,
-    Solver_Params,
-    Points,
-    f,
+from oneplusone import (
+    Evolutionary_algorithm,
+    Solver_Parameters,
     Learning_params,
-    test_case,
 )
+
 import matplotlib.pyplot as plt
 import numpy as np
 import cec2017.functions as functions
-from functools import partial
 
 f1bench = functions.f1
 f9bench = functions.f9
@@ -69,31 +64,17 @@ def f9x(x):
 
 
 x = [3.0, 1.0, 2.0, 2.0, 2.0, 1.0, 2.0, 2.0, 3.7, 2.1]
-f1 = partial(f, alfa=10)
-x_0 = Points([3.0, 1.0, 2.0, 2.0, 2.0, 1.0, 2.0, 2.0, 3.7, 2.1])
 imax = 100
 error = 1e-14
 inter = 10
 
 params = Learning_params(0.002, imax, error)
-
-# params2 = Learning_params(0.02, imax, error)
-
-# params3 = Learning_params(0.0095, imax, error)
-
-# params4 = Learning_params(0.0099, imax, error)
-
-test_case(f1, x_0, params)
-test_averageplot(f1x, x, 0.45, imax, inter)
-# test_averageplot(f9, x, 0.1, tmax, inter)
-# test_averageplot(f1, x, 1.2, tmax, inter)
-# test_plot(f9, x, 0.8, tmax, inter)
-# test_plot(f1, x, 4, tmax, inter)
-plt.title("Comparision of gradient descent and ES(1+1)")
+test_averageplot(f9x, x, 0.1, imax, inter)
+plt.title("ES(1+1) value by iteration")
 
 plt.xlabel("Iteration")
 plt.ylabel("Value of q(x)")
 
-# plt.yscale("log")
+plt.yscale("log")
 plt.legend()
 plt.show()

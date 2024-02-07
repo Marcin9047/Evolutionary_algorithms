@@ -3,6 +3,13 @@ from dataclasses import dataclass
 
 
 @dataclass
+class Learning_params:
+    lerning_rate: float
+    tmax: int
+    error: float
+
+
+@dataclass
 class Solver_Parameters:
     x0: list
     sigma0: float
@@ -43,7 +50,7 @@ class Evolutionary_algorithm:
         successful = []
         suc_t = []
         all_x = []
-        succesful_x = []
+        suc_x = []
 
         t = 1
         success_rate = 0
@@ -54,7 +61,7 @@ class Evolutionary_algorithm:
         grades.append(grademin)
         all_x.append(xmin)
         suc_t.append(0)
-        succesful_x.append(xmin)
+        suc_x.append(xmin)
 
         while self.stop_conditions(t, suc_t) is False:
             m_new = self.mutation(xmin, sigma)
@@ -69,7 +76,7 @@ class Evolutionary_algorithm:
                 success_rate += 1
 
                 successful.append(m_grad)
-                succesful_x.append(m_new)
+                suc_x.append(m_new)
                 suc_t.append(t)
             if t % self.params.interval == 0:
                 if (success_rate / self.params.interval) > 0.2:
@@ -79,17 +86,5 @@ class Evolutionary_algorithm:
                 success_rate = 0
             t += 1
 
-        results = Solver_Results(xmin, grades, successful, suc_t, all_x, succesful_x)
+        results = Solver_Results(xmin, grades, successful, suc_t, all_x, suc_x)
         return results
-
-
-# średnai ostatnich wyników przekracza założoną wartość
-
-
-# utils.surface_plot(functions.f1, points=120)
-
-# dimension = 10
-# for i in range(0, 10):
-#     x = np.random.uniform(low=-100, high=100, size=dimension)
-#     y = f1([x])[0]
-#     print(f"f5({x[0]:.2f}, {x[1]:.2f}, ...) = {y:.2f}")
